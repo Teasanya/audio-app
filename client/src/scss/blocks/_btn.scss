@@ -1,0 +1,15 @@
+.btn {
+  border: none;
+  color: $color-dark-gray;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    svg {
+      color: rgb(94, 93, 93);
+    }
+  }
+}

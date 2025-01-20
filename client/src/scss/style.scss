@@ -1,0 +1,16 @@
+@import './global/normalize';
+// @import 'global/_fonts';
+@import 'global/_variables';
+// @import 'global/_mixins';
+@import './global/reboot';
+@import 'global/_container';
+@import './global/visually-hidden';
+
+/* Blocks */
+/* ------------------------------------ */
+@import './blocks/header';
+@import './blocks/navigation';
+@import './blocks/audiolist';
+@import './blocks/audio-table';
+@import './blocks/music-player';
+@import './blocks/btn';

@@ -1,0 +1,9 @@
+.audiolist {
+  grid-area: main;
+  &__wrapper {
+    padding: 30px 46px;
+  }
+  &__title {
+    margin: 0 0 22px 0;
+  }
+}
