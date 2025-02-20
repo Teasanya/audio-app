@@ -15,13 +15,10 @@ function convertMinToSec(duration: number): string {
 }
 
 async function init() {
-  // console.log('yeah');
-  // await model.loadingAudio();
-  // console.log(model.data);
   /**
    * * Пробный запрос на регистрацию
    */
-  await model.registerUser('sssashaaaaaa', 'sssaaasha@mail.ru');
+  await model.registerUser('sssashaaaaaaaa', 'sssaaasha@mail.ru');
 
   /**
    * * событие для кнопки play

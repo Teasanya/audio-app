@@ -8,7 +8,7 @@ export class Model {
   }
 
   async registerUser(username: string, password: string): Promise<void> {
-    return fetch('http://localhost:8000/api/register', {
+    return fetch('/api/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
