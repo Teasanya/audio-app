@@ -8,7 +8,7 @@ export class Model {
   }
 
   async registerUser(username: string, password: string): Promise<void> {
-    return fetch('/api/api/register', {
+    return fetch('/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,14 +30,5 @@ export class Model {
           reject();
         });
     });
-  }
-
-  convertMinToSec(duration: number): string {
-    const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
-    const minutes: number | string = formatTime(Math.floor(duration / 60));
-    const seconds: number | string = formatTime(
-      Math.floor(duration - +minutes * 60)
-    );
-    return `${minutes}:${seconds}`;
   }
 }
