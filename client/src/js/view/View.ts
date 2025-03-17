@@ -1,3 +1,5 @@
+import convertMinToSec from '../utils/convertMinToSec';
+
 export class View {
   app: HTMLDivElement;
   audio: HTMLAudioElement;
@@ -38,18 +40,11 @@ export class View {
   init() {
     this.app?.append(this.audio);
   }
-  convertMinToSec(duration: number): string {
-    const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
-    const minutes: number | string = formatTime(Math.floor(duration / 60));
-    const seconds: number | string = formatTime(
-      Math.floor(duration - +minutes * 60)
-    );
-    return `${minutes}:${seconds}`;
-  }
+
   handlePlayingAudio() {
     let playing = false;
     this.playBtn.addEventListener('click', () => {
-      this.duration.textContent = this.convertMinToSec(this.audio.duration);
+      this.duration.textContent = convertMinToSec(this.audio.duration);
       playing ? this.audio.pause() : this.audio.play();
       playing = !playing;
     });
@@ -59,7 +54,7 @@ export class View {
       const currentTime = (event.target as HTMLAudioElement).currentTime;
       const duration = (event.target as HTMLAudioElement).duration;
       const width = (currentTime * 100) / duration;
-      this.timeline.innerHTML = this.convertMinToSec(currentTime);
+      this.timeline.innerHTML = convertMinToSec(currentTime);
       this.progress.style.width = `${width}%`;
     });
   }

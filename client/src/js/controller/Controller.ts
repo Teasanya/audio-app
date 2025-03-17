@@ -19,33 +19,13 @@ class Controller {
     this.view = view;
   }
 
-  // async init() {
-  //   /**
-  //    * * Пробный запрос на регистрацию
-  //    */
-  //   // await model.registerUser('sssashaaaaaaaa', 'sssaaasha@mail.ru');
-  //   /**
-  //    * * событие для кнопки play
-  //    */
-  //   // const app = document.querySelector('#app');
-  //   // const audio = new Audio('/audio/1.mp3') as HTMLMediaElement;
-  //   // audio.addEventListener('timeupdate', (event: Event) => {
-  //   //   // console.log((event.target as HTMLAudioElement).currentTime);
-  //   //   // console.log(this.currentTime);
-  //   // });
-  //   // audio.addEventListener('timeupdate', function (event: Event) {
-  //   //   // console.log((event.target as HTMLAudioElement).currentTime);
-  //   //   const progress = document.querySelector('.music-player__progress');
-  //   //   const timeline = document.querySelector(
-  //   //     '.music-player__time-start'
-  //   //   ) as HTMLDivElement;
-  //   //   const currentTime = this.currentTime;
-  //   //   const duration = this.duration;
-  //   //   timeline.innerHTML = this.model.convertMinToSec(currentTime);
-  //   // });
-  // }
+  async init() {
+    await this.model.registerUser('sssashaaaaaaaa', 'sssaaasha103445');
+  }
 
   playing() {
+    this.init();
+
     this.view.init();
     this.view.handlePlayingAudio();
     this.view.handleProgressBar();
