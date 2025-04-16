@@ -1,0 +1,39 @@
+.custom-input {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+
+  &__field {
+    border: none;
+    border-bottom: 1px solid #c8c8ca;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 10px 10px 10px 10px;
+    color: #5a5a5a;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #c8c8ca;
+    }
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #99999e;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    user-select: none;
+    cursor: pointer;
+  }
+}

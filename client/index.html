@@ -11,6 +11,7 @@
         <div class="header__left">
           <a href="#" class="header__logo">
             <img
+              class="header__logo-img"
               src="/images/logo.png"
               alt="логотип"
               class="header__logo-img"
@@ -35,17 +36,17 @@
         <div class="navigation__wrapper">
           <ul class="navigation__menu">
             <li class="navigation__menu-item">
-              <button class="navigation__btn">
+              <a href="/favorites" class="navigation__btn">
                 <img
                   src="/images/MusicNotes.png"
                   alt=""
                   class="navigation__btn-icon"
                 />
                 <span>Избранное</span>
-              </button>
+              </a>
             </li>
             <li class="navigation__menu-item">
-              <button class="navigation__btn navigation__btn--active">
+              <a href="/" class="navigation__btn navigation__btn--active">
                 <img
                   src="/images/MusicNotes.png"
                   alt=""
@@ -54,7 +55,7 @@
                   height="32"
                 />
                 <span>Аудиокомпозиции</span>
-              </button>
+              </a>
             </li>
           </ul>
         </div>
@@ -113,8 +114,8 @@
               />
             </div>
             <div class="music-player__info">
-              <h3 class="music-player__track-title">
-                <span>Nirvana</span>
+              <h3 class="music-player__track">
+                <span class="music-player__track-title">Nirvana</span>
                 <svg
                   width="24"
                   height="24"
@@ -171,6 +172,7 @@
               </button>
               <button type="button" class="btn music-player__play">
                 <svg
+                  class="music-player__play-icon"
                   width="40"
                   height="40"
                   viewBox="0 0 40 40"
@@ -182,6 +184,28 @@
                     d="M27.0385 21.4138C26.9679 21.4862 26.7012 21.7962 26.4528 22.0512C24.9963 23.655 21.197 26.28 19.2085 27.0813C18.9065 27.21 18.143 27.4825 17.735 27.5C17.3441 27.5 16.9715 27.41 16.6159 27.2275C16.1727 26.9725 15.8171 26.5713 15.6223 26.0975C15.4968 25.7688 15.302 24.785 15.302 24.7675C15.1072 23.6913 15 21.9425 15 20.01C15 18.1688 15.1072 16.4913 15.2667 15.3988C15.2849 15.3812 15.4798 14.1588 15.6929 13.74C16.0838 12.975 16.8473 12.5 17.6644 12.5H17.735C18.2672 12.5187 19.3863 12.9938 19.3863 13.0113C21.2677 13.8138 24.9793 16.31 26.471 17.9688C26.471 17.9688 26.8911 18.395 27.0738 18.6613C27.3587 19.0437 27.5 19.5175 27.5 19.9913C27.5 20.52 27.3405 21.0125 27.0385 21.4138Z"
                     fill="white"
                   />
+                </svg>
+                <svg
+                  class="music-player__pause-icon"
+                  height="40"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 512 512"
+                  width="40"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <path
+                      d="M224,435.8V76.1c0-6.7-5.4-12.1-12.2-12.1h-71.6c-6.8,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6   C218.6,448,224,442.6,224,435.8z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M371.8,64h-71.6c-6.7,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6c6.7,0,12.2-5.4,12.2-12.2V76.1   C384,69.4,378.6,64,371.8,64z"
+                      fill="currentColor"
+                    />
+                  </g>
                 </svg>
               </button>
               <button type="button" class="btn music-player__btn-next">
@@ -225,41 +249,192 @@
               <div class="music-player__time-end">06:55</div>
             </div>
           </div>
-          <div class="music-player__volume">
-            <button type="button" class="btn music-player__volume-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 10.5H2C1.86739 10.5 1.74021 10.4473 1.64645 10.3536C1.55268 10.2598 1.5 10.1326 1.5 10V6C1.5 5.86739 1.55268 5.74021 1.64645 5.64645C1.74021 5.55268 1.86739 5.5 2 5.5H5L9.5 2V14L5 10.5Z"
-                  stroke="#AAAAAA"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+          <div class="music-player__right">
+            <div class="music-player__volume">
+              <button type="button" class="btn music-player__volume-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 10.5H2C1.86739 10.5 1.74021 10.4473 1.64645 10.3536C1.55268 10.2598 1.5 10.1326 1.5 10V6C1.5 5.86739 1.55268 5.74021 1.64645 5.64645C1.74021 5.55268 1.86739 5.5 2 5.5H5L9.5 2V14L5 10.5Z"
+                    stroke="#AAAAAA"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5 5.5V10.5"
+                    stroke="#AAAAAA"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.9124 6.58582C12.0981 6.77153 12.2454 6.99201 12.3459 7.23466C12.4464 7.47731 12.4981 7.73739 12.4981 8.00003C12.4981 8.26267 12.4464 8.52274 12.3459 8.7654C12.2454 9.00805 12.0981 9.22853 11.9124 9.41424"
+                    stroke="#AAAAAA"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <div class="music-player__volume-bar">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  name="volume"
+                  value="0.5"
+                  class="music-player__volume-input"
                 />
-                <path
-                  d="M5 5.5V10.5"
-                  stroke="#AAAAAA"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M11.9124 6.58582C12.0981 6.77153 12.2454 6.99201 12.3459 7.23466C12.4464 7.47731 12.4981 7.73739 12.4981 8.00003C12.4981 8.26267 12.4464 8.52274 12.3459 8.7654C12.2454 9.00805 12.0981 9.22853 11.9124 9.41424"
-                  stroke="#AAAAAA"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-            <div class="music-player__volume-bar"></div>
+                <!-- <label
+                  for="volume"
+                  class="music-player__volume-progress"
+                > -->
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </main>
+      <div class="modal modal--active modal--login">
+        <div class="modal__wrapper">
+          <div class="modal__content">
+            <form class="modal-form modal-form--register" id="form-register">
+              <fieldset class="modal-form__group">
+                <legend class="modal-form__group-name">Регистрация</legend>
 
+                <div class="modal-form__inner">
+                  <div class="modal-form__upper">
+                    <div class="custom-input">
+                      <input
+                        class="custom-input__field"
+                        type="text"
+                        name="username"
+                        id="username"
+                        required
+                      />
+                      <label for="username" class="custom-input__label"
+                        >Имя</label
+                      >
+                    </div>
+                    <div class="custom-input">
+                      <input
+                        class="custom-input__field"
+                        type="password"
+                        name="password"
+                        id="password"
+                      />
+                      <label for="password" class="custom-input__label"
+                        >Пароль</label
+                      >
+                    </div>
+                    <div class="custom-input">
+                      <input
+                        class="custom-input__field"
+                        type="password"
+                        name="password-verification"
+                        id="password-verification"
+                      />
+                      <label
+                        for="password-verification"
+                        class="custom-input__label"
+                        >Повторите пароль</label
+                      >
+                    </div>
+                  </div>
+                  <div class="modal-form__bottom">
+                    <button class="btn modal-form__btn" type="submit">
+                      <span class="modal-form__btn-text"
+                        >Зарегистрироваться</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <form class="modal-form modal-form--login" id="form-login">
+              <fieldset class="modal-form__group">
+                <legend class="modal-form__group-name">Войти</legend>
+
+                <div class="modal-form__inner">
+                  <div class="modal-form__upper">
+                    <div class="custom-input">
+                      <input
+                        class="custom-input__field"
+                        type="text"
+                        name="username"
+                        id="username-login"
+                        required
+                      />
+                      <label for="username-login" class="custom-input__label"
+                        >Имя</label
+                      >
+                    </div>
+                    <div class="custom-input">
+                      <input
+                        class="custom-input__field"
+                        type="password"
+                        name="password"
+                        id="password-login"
+                      />
+                      <label for="password-login" class="custom-input__label"
+                        >Пароль</label
+                      >
+                    </div>
+                  </div>
+                  <div class="modal-form__bottom">
+                    <button class="btn modal-form__btn" type="submit">
+                      <span class="modal-form__btn-text">Войти</span>
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <span class="modal__login-link"
+              >Уже зарегистрирован? <a href="#">Войти</a></span
+            >
+            <span class="modal__register-link"
+              >Еще не зарегистрирован? <a href="#">Зарегистрироваться</a></span
+            >
+
+            <!-- <button class="modal__btn" type="button">
+              <svg
+                class="modal__icon-close"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <use xlink:href="images/sprite.svg#icon-cross"></use>
+              </svg>
+            </button> -->
+            <!-- <div class="modal-submit modal-submit--active">
+              <span class="modal-submit__heading"> Отправлено </span>
+              <div class="modal-submit__bottom">
+                <svg
+                  class="modal-submit__icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use xlink:href="images/sprite.svg#icon-time"></use>
+                </svg>
+                <span class="modal-submit__text"
+                  >закроется через 3 секунды</span
+                >
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- <script
+      type="module"
+      src="/src/js/controller/RegistrationController.ts"
+    ></script> -->
+    <script type="module" src="/src/js/main.ts"></script>
     <script type="module" src="/src/js/controller/Controller.ts"></script>
+    <script src="/src/js/utils/url-router.ts"></script>
   </body>
 </html>

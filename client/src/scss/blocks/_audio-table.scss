@@ -1,4 +1,5 @@
 .audio-table {
+  padding: 30px 46px;
   width: 100%;
   background-color: #fff;
   text-align: left;
@@ -18,5 +19,20 @@
   td {
     padding: 32px 10px;
     border-bottom: 1px solid $color-white-smoke;
+  }
+
+  tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in;
+  }
+
+  // tr:hover {
+  //   &:before {
+  //     opacity: 1;
+  //   }
+
+  tr:not(:first-child):hover {
+    background-color: $color-white-smoke;
+    box-shadow: -46px 0 $color-white-smoke;
   }
 }

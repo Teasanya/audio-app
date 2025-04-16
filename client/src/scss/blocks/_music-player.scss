@@ -1,12 +1,20 @@
 .music-player {
-  grid-area: ft;
+  width: 100%;
+  z-index: 10;
   max-height: 150px;
+  border-top: 1px solid $color-smoke-gray;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: $color-white;
 
   &__wrapper {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: auto 1fr 110px;
+    grid-template-columns: minmax(300px, 500px) 1fr 1fr;
+    justify-content: flex-start;
+    align-items: center;
     gap: 20px;
     padding: 19px 38px;
   }
@@ -14,8 +22,32 @@
   &__left {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__track-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  &__track {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__track-name {
+    margin: 0;
+    padding: 0;
   }
 
   &__center {
@@ -23,11 +55,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 6px;
   }
 
   &__btn-wrapper {
     display: flex;
+  }
+
+  &__pause-icon {
+    display: none;
   }
 
   &__progress-wrapper {
@@ -41,7 +77,7 @@
     width: 400px;
     height: 5px;
     border-radius: 5px;
-    background-color: rgb(248, 233, 210);
+    background-color: $color-smoke-gray;
     cursor: pointer;
   }
 
@@ -49,11 +85,75 @@
     width: 0;
     height: 100%;
     border-radius: 5px;
-    background-color: rgb(244, 168, 6);
+    background-color: $color-rude-orange;
     transition: width 0.3s ease-in-out;
   }
 
   &__right {
     display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
+
+  &__volume {
+    position: relative;
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__volume-icon {
+    padding: 0;
+  }
+
+  &__volume-input {
+    appearance: none;
+    -webkit-appearance: none;
+    // background-color: $color-smoke-gray;
+    border-radius: 5px;
+    width: 72px;
+    height: 4px;
+    background: linear-gradient(to right, #fc6d3e 50%, #e8e8e8 50%);
+    // overflow: hidden;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      background-color: $color-rude-orange;
+      border-radius: 50%;
+      height: 12px;
+      width: 12px;
+      // box-shadow: -100px 0 0 100px $color-rude-orange;
+    }
+
+    &::-moz-progress-bar {
+      appearance: none;
+      background-color: $color-rude-orange;
+      border: 0;
+      border-radius: 50%;
+      height: 12px;
+      width: 12px;
+      // box-shadow: -100px 0 0 100px $color-rude-orange;
+    }
+  }
+
+  // &__volume-bar {
+  //   position: absolute;
+  //   top: 8px;
+  //   left: 22px;
+  //   transform: translateY(-50%);
+  //   width: 72px;
+  //   height: 4px;
+  //   border-radius: 5px;
+  //   background-color: $color-smoke-gray;
+  //   cursor: pointer;
+  // }
+
+  // &__volume-progress {
+  //   display: block;
+  //   width: 3px;
+  //   height: 100%;
+  //   border-radius: 5px;
+  //   background-color: $color-rude-orange;
+  // }
 }
