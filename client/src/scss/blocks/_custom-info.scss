@@ -1,0 +1,18 @@
+.custom-info {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  height: 80px;
+  border-radius: 15px;
+
+  &--error {
+    background-color: rgb(252, 222, 204);
+    border: 2px solid rgb(232, 95, 16);
+  }
+
+  &--success {
+    background-color: rgb(228, 252, 204);
+    border: 2px solid rgb(95, 232, 16);
+  }
+}

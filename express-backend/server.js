@@ -11,9 +11,25 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'X-Requested-With,content-type,Authorization'
   );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  );
   next();
 });
 
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type,Authorization'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  );
+  res.sendStatus(200);
+});
 app.use(bodyParser.json());
 app.use('/api', routes);
 

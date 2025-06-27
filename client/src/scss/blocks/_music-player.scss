@@ -32,17 +32,32 @@
     justify-content: space-between;
   }
 
+  &__img-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
+
+    &--animated {
+      .music-player__img {
+        animation: rotate-img 3s linear infinite;
+        transform-origin: center;
+      }
+    }
+  }
+
+  &__upper-info {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__like-btn {
+  }
+
   &__track-title {
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
-  }
-
-  &__track {
-    display: flex;
-    gap: 10px;
   }
 
   &__track-name {
@@ -62,8 +77,31 @@
     display: flex;
   }
 
+  &__play {
+    position: relative;
+    &--paused {
+      .music-player__play-icon {
+        opacity: 0;
+      }
+
+      .music-player__pause-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__play-icon {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+  }
+
   &__pause-icon {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
   }
 
   &__progress-wrapper {
@@ -79,14 +117,26 @@
     border-radius: 5px;
     background-color: $color-smoke-gray;
     cursor: pointer;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: #4285f4;
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
   }
 
   &__progress {
-    width: 0;
+    position: relative;
     height: 100%;
+    width: 0;
     border-radius: 5px;
     background-color: $color-rude-orange;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.3s linear;
+    transform-origin: left center;
+    will-change: width;
   }
 
   &__right {
@@ -110,12 +160,11 @@
   &__volume-input {
     appearance: none;
     -webkit-appearance: none;
-    // background-color: $color-smoke-gray;
     border-radius: 5px;
     width: 72px;
     height: 4px;
     background: linear-gradient(to right, #fc6d3e 50%, #e8e8e8 50%);
-    // overflow: hidden;
+    cursor: pointer;
 
     &::-webkit-slider-thumb {
       appearance: none;
@@ -124,6 +173,12 @@
       height: 12px;
       width: 12px;
       // box-shadow: -100px 0 0 100px $color-rude-orange;
+      transition: transform 0.2s ease-in;
+      // transform: scale(1);
+
+      &:hover {
+        transform: scale(1.3);
+      }
     }
 
     &::-moz-progress-bar {
@@ -133,27 +188,15 @@
       border-radius: 50%;
       height: 12px;
       width: 12px;
-      // box-shadow: -100px 0 0 100px $color-rude-orange;
     }
   }
+}
 
-  // &__volume-bar {
-  //   position: absolute;
-  //   top: 8px;
-  //   left: 22px;
-  //   transform: translateY(-50%);
-  //   width: 72px;
-  //   height: 4px;
-  //   border-radius: 5px;
-  //   background-color: $color-smoke-gray;
-  //   cursor: pointer;
-  // }
-
-  // &__volume-progress {
-  //   display: block;
-  //   width: 3px;
-  //   height: 100%;
-  //   border-radius: 5px;
-  //   background-color: $color-rude-orange;
-  // }
+@keyframes rotate-img {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

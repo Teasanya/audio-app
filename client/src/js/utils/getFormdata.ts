@@ -1,9 +1,5 @@
-const getFormData = async (
-  e: Event,
-  handler: (username: string, password: string) => void
-) => {
+const getFormData = (e: Event) => {
   e.preventDefault();
-  console.log('getdata');
   let formData = new FormData(e.target as HTMLFormElement);
   const credentials = {
     username: formData.get('username'),
@@ -11,7 +7,9 @@ const getFormData = async (
   };
   const { username, password } = credentials;
   if (typeof username === 'string' && typeof password === 'string') {
-    await handler(username, password);
+    return { username, password };
+  } else {
+    return { username: '', password: '' };
   }
 };
 

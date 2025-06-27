@@ -1,45 +1,59 @@
-// protected readonly elements: NodeListOf<HTMLElement>
+type Route = {
+  path: string;
+  title: string;
+  showApp: boolean;
+};
+
+const ROUTES: Record<string, Route> = {
+  '/': {
+    path: '/',
+    title: 'Аудиофайлы и треки',
+    showApp: true,
+  },
+  '/favorites': {
+    path: '/favorites',
+    title: 'Избранное',
+    showApp: false,
+  },
+};
 
 document
   .querySelector('.navigation__menu')
   ?.addEventListener('click', (e: Event) => {
-    e.preventDefault();
-    const { target } = e;
-    if (!(target as HTMLElement).closest('.navigation__btn')) return;
-    const path = (
-      (target as HTMLElement).closest('.navigation__btn') as HTMLAnchorElement
-    ).href;
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.navigation__btn') as HTMLAnchorElement | null;
 
-    routeHandler(path);
+    if (!btn) return;
+
+    e.preventDefault();
+    navigateTo(btn.href);
   });
 
-const routeHandler = (path: string) => {
-  window.history.pushState({}, '', path);
-  if (window.location.pathname === '/favorites') {
-    document
-      .querySelectorAll<HTMLElement>('.navigation__btn')
-      .forEach((btn) => {
-        btn.classList.remove('navigation__btn--active');
-      });
-    (
-      document.querySelector("[href='/favorites']") as HTMLElement
-    ).classList.add('navigation__btn--active');
+function navigateTo(path: string) {
+  const url = new URL(path, window.location.origin);
+  const route = ROUTES[url.pathname] || ROUTES['/'];
 
-    (document.querySelector('.audiolist__title') as HTMLElement).textContent =
-      'Избранное';
-    (document.querySelector('#app') as HTMLElement).style.display = 'none';
-  } else {
-    document
-      .querySelectorAll<HTMLElement>('.navigation__btn')
-      .forEach((btn) => {
-        btn.classList.remove('navigation__btn--active');
-      });
-    (document.querySelector("[href='/']") as HTMLElement).classList.add(
-      'navigation__btn--active'
+  window.history.pushState({ path: url.pathname }, '', url.pathname);
+  updateUI(route);
+}
+
+function updateUI(route: Route) {
+  (document.querySelector('.audiolist__title') as HTMLElement).textContent =
+    route.title;
+
+  document.querySelectorAll('.navigation__btn').forEach((btn) => {
+    btn.classList.toggle(
+      'navigation__btn--active',
+      btn.getAttribute('href') === route.path
     );
-    (document.querySelector('.audiolist__title') as HTMLElement).textContent =
-      'Аудиофайлы и треки';
-    (document.querySelector('#app') as HTMLElement).style.display = 'block';
-  }
-  console.log();
-};
+  });
+}
+
+window.addEventListener('popstate', (e) => {
+  const path = e.state?.path || '/';
+  const route = ROUTES[path] || ROUTES['/'];
+  updateUI(route);
+});
+
+const initialPath = window.location.pathname;
+navigateTo(initialPath);

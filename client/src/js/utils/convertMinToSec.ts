@@ -1,10 +1,9 @@
 const convertMinToSec = (duration: number): string => {
-  const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
-  const minutes: number | string = formatTime(Math.floor(duration / 60));
-  const seconds: number | string = formatTime(
-    Math.floor(duration - +minutes * 60)
-  );
-  return `${minutes}:${seconds}`;
+  if (!isFinite(duration)) return '00:00';
+  const formatTime = (time: number) => time.toString().padStart(2, '0');
+  const minutes = Math.floor(duration / 60);
+  const seconds = Math.floor(duration % 60);
+  return `${formatTime(minutes)}:${formatTime(seconds)}`;
 };
 
 export default convertMinToSec;

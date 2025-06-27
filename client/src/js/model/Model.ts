@@ -1,4 +1,11 @@
+import { Data } from '../view/View';
+
 const API_URL = '';
+
+interface Resp<T> {
+  code: number;
+  data: T;
+}
 
 export class Model {
   data: [];
@@ -7,7 +14,7 @@ export class Model {
     this.data = [];
   }
 
-  async registerUser(username: string, password: string): Promise<void> {
+  async registerUser(username: string, password: string): Promise<unknown> {
     try {
       const response = await fetch('http://localhost:8000/api/register', {
         method: 'POST',
@@ -18,37 +25,58 @@ export class Model {
       });
 
       if (!response.ok) {
-        const errorResponse = await response.json().catch(() => null);
-        console.log(errorResponse.message);
-        throw new Error(`${response.status}, ${errorResponse.message}`);
+        let errorMessage = `HTTP ${response.status}`;
+
+        if (
+          response.status === 400 ||
+          errorMessage.toLowerCase().includes('уже существует')
+        ) {
+          throw new Error('USER_EXISTS');
+        }
+
+        throw new Error(errorMessage);
       }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('fetch error', error.message);
-        throw error;
-      } else {
-        console.error('Неизвестная ошибка');
+
+      return await response.json();
+    } catch (e) {
+      if (typeof e === 'object' && e !== null && 'message' in e) {
+        throw new Error(`${e.message}`);
       }
+      throw e;
     }
   }
 
-  async loginUser(username: string, password: string): Promise<void> {
-    return fetch('http://localhost:8000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((response) => response.json())
-      .then((data) =>
-        localStorage.setItem(
-          'Token',
-          JSON.stringify('Bearer' + ' ' + data.token)
-        )
-      );
+  async loginUser(username: string, password: string): Promise<{} | unknown> {
+    try {
+      const response = await fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = `HTTP ${response.status}`;
+
+        if (
+          response.status === 400 ||
+          errorMessage.toLowerCase().includes('неверные')
+        ) {
+          throw new Error('INVALID_DATA');
+        }
+
+        throw new Error(errorMessage);
+      }
+      const data = await response.json();
+      localStorage.setItem('Token', JSON.stringify(data.token));
+      return data;
+    } catch (error) {
+      if (typeof error === 'object' && error !== null && 'message' in error) {
+        throw new Error(`${error.message}`);
+      }
+      throw error;
+    }
   }
 
   async loadingAudio() {
@@ -57,7 +85,7 @@ export class Model {
       fetch('http://localhost:8000/api/tracks', {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer `,
         },
       })
         .then((res) => res.json())
@@ -69,5 +97,90 @@ export class Model {
           reject();
         });
     });
+  }
+
+  async getFavorites(): Promise<{ data?: Data; error?: string }> {
+    const token = localStorage.getItem('Token') as string;
+    try {
+      const response = await fetch('http://localhost:8000/api/favorites', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      const result = await response.json();
+
+      return { data: result };
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('fetch error', error.message);
+        return { error: error.message };
+      } else {
+        console.error('Неизвестная ошибка');
+        return { error: 'Неизвестная ошибка' };
+      }
+    }
+  }
+
+  async addToFavorites(id: number) {
+    const token = localStorage.getItem('Token') as string;
+
+    try {
+      const response = await fetch('http://localhost:8000/api/favorites', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ trackId: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      }
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('fetch error', error.message);
+        return error.message;
+      } else {
+        console.error('Неизвестная ошибка');
+      }
+    }
+  }
+
+  async deleteFromFavorites(id: number) {
+    const token = localStorage.getItem('Token') as string;
+
+    try {
+      const response = await fetch('http://localhost:8000/api/favorites', {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ trackId: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      }
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('fetch error', error.message);
+        return error.message;
+      } else {
+        console.error('Неизвестная ошибка');
+      }
+    }
   }
 }

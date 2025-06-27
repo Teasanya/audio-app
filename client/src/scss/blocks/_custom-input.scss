@@ -15,7 +15,12 @@
     padding: 10px 10px 10px 10px;
     color: #5a5a5a;
 
+    &:hover {
+      border-bottom: 1px solid #f8a342;
+    }
+
     &:focus-visible {
+      border-bottom: 1px solid #f7bd7b;
       outline: none;
     }
 

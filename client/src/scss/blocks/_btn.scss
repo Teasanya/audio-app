@@ -7,9 +7,40 @@
   justify-content: center;
   cursor: pointer;
 
+  svg {
+    transition: color $transition-200;
+  }
+
   &:hover {
     svg {
-      color: rgb(94, 93, 93);
+      color: rgb(66, 66, 66);
+    }
+  }
+
+  &--active {
+    svg {
+      color: $color-rude-orange;
+    }
+  }
+
+  &--like {
+    svg {
+      color: rgba($color-rude-orange, 0.8);
+      transform: scale(1);
+      transition: transform $transition-200, color $transition-200;
+    }
+
+    &:hover {
+      svg {
+        color: $color-rude-orange;
+        transform: scale(1.3);
+      }
+    }
+  }
+
+  &--liked {
+    svg {
+      color: $color-rude-orange;
     }
   }
 }
